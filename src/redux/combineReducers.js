@@ -18,6 +18,18 @@ export default function combineReducers(reducers){
             const previousStateForKey = state[key]
             const nextStateForKey = reducer(previousStateForKey, action)
             nextState[key] = nextStateForKey
+            /**
+             * nextStateForKey !== previousStateForKey 浅比较
+             * 如果reducer直接改变对象的属性而不是返回一个新对象，那么hasChanged将为false，
+             * 导致执行完reducer将返回旧的state，页面可能不会刷新
+             * 这就是为什么Redux需要reducers是纯函数的原因:
+             * 
+             * 比较两个Javascript对象所有的属性是否相同的的唯一方法是对它们进行深比较。
+             * 但是深比较在真实的应用当中代价昂贵，因为通常js的对象都很大，同时需要比较的次数很多。
+             * 因此一个有效的解决方法是作出一个规定：无论何时发生变化时，开发者都要创建一个新的对象，然后将新对象传递出去。
+             * 同时，当没有任何变化发生时，开发者发送回旧的对象。也就是说，新的对象代表新的state。
+             * 
+             */
             hasChanged = hasChanged || nextStateForKey !== previousStateForKey
         })
         return hasChanged ? nextState : state

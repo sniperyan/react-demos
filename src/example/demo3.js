@@ -46,10 +46,21 @@ class App extends Component {
     }
 
     render() {
+        var obj1 = { 
+            a: [1, 2, 3], 
+            b:{
+                aa:[123,222],
+                bb:{
+                    aaa:{
+                        aaaa:[1,2,3]
+                    }
+                }
+            }
+        }
         const store = createStore(
             reducer,
             undefined,
-            applyMiddleware(fEnhancer,fEnhancer2)
+            applyMiddleware(fEnhancer, fEnhancer2)
         )
 
         var unsubscribe = store.subscribe(() => {
@@ -70,6 +81,8 @@ class App extends Component {
       </div>
         );
     }
+
 }
+
 
 export default App;
