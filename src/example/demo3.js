@@ -46,17 +46,6 @@ class App extends Component {
     }
 
     render() {
-        var obj1 = { 
-            a: [1, 2, 3], 
-            b:{
-                aa:[123,222],
-                bb:{
-                    aaa:{
-                        aaaa:[1,2,3]
-                    }
-                }
-            }
-        }
         const store = createStore(
             reducer,
             undefined,
