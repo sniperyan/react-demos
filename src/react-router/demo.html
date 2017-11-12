@@ -19,7 +19,7 @@
         this.routes[path] = callback || function(){};
     };
     Router.prototype.refresh = function() {
-        this.currentUrl = location.hash.slice(1) || '/';
+        this.currentUrl = location.hash.replace('#','') || '/';
         this.routes[this.currentUrl]();
     };
     Router.prototype.init = function() {
